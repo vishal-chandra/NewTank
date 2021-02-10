@@ -20,5 +20,8 @@ public final class Constants {
     public static final int rightVictorPort = 3;
     public static final int leftVictorPort  = 4;
 
+    //window to await the completion of ctre config methods
+    public static final int kTimeoutMs = 30;
+
     public static final int kXboxPort = 1;
 }
