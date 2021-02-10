@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import frc.robot.custom.Gains;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -22,6 +24,10 @@ public final class Constants {
 
     //window to await the completion of ctre config methods
     public static final int kTimeoutMs = 30;
+
+    //Velocity Driving Gains
+    public static final Gains rightDriveGains = new Gains();
+    public static final Gains leftDriveGains = new Gains();
 
     public static final int kXboxPort = 1;
 }
