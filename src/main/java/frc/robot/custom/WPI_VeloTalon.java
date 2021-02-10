@@ -9,9 +9,17 @@ import static frc.robot.Constants.kTimeoutMs;
 
 public class WPI_VeloTalon extends TalonSRX implements SpeedController {
 
-    public WPI_VeloTalon(int deviceNumber) {
+    public WPI_VeloTalon(int deviceNumber, Gains gains) {
         super(deviceNumber);
+        configFactoryDefault();
         configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
+        //setSensorPhase(false); //for sensor alignments
+
+        //set gains
+        config_kF(0, gains.kF, kTimeoutMs);
+        config_kP(0, gains.kP, kTimeoutMs);
+        config_kI(0, gains.kI, kTimeoutMs);
+        config_kD(0, gains.kD, kTimeoutMs);
     }
 
     @Override //required implementation
@@ -37,7 +45,6 @@ public class WPI_VeloTalon extends TalonSRX implements SpeedController {
         return super.getInverted();
     }
 
-
     @Override
     public void disable() {
         neutralOutput();
@@ -48,5 +55,4 @@ public class WPI_VeloTalon extends TalonSRX implements SpeedController {
         neutralOutput();
     }
 
-    
 }
