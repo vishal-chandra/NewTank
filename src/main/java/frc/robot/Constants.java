@@ -29,5 +29,8 @@ public final class Constants {
     public static final Gains rightDriveGains = new Gains();
     public static final Gains leftDriveGains = new Gains();
 
+    //Drive Characteristics
+    public static final int MAX_RPM = 567;
+
     public static final int kXboxPort = 1;
 }

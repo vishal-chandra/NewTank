@@ -5,8 +5,11 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.SpeedController;
 
-import static frc.robot.Constants.kTimeoutMs;
+import static frc.robot.Constants.*;
 
+/**
+ * A DifferentialDrive compatible TalonSRX Wrapper allowing velocity control
+ */
 public class WPI_VeloTalon extends TalonSRX implements SpeedController {
 
     public WPI_VeloTalon(int deviceNumber, Gains gains) {
@@ -26,8 +29,9 @@ public class WPI_VeloTalon extends TalonSRX implements SpeedController {
     public void pidWrite(double output) {}
 
     @Override
-    public void set(double command) {
-        super.set(ControlMode.Velocity, command);
+    public void set(double pctCommand) {
+        double targetVelocity = commandToTargetVelocity(pctCommand);
+        super.set(ControlMode.Velocity, targetVelocity);
     }
 
     @Override
@@ -55,4 +59,10 @@ public class WPI_VeloTalon extends TalonSRX implements SpeedController {
         neutralOutput();
     }
 
+    private double commandToTargetVelocity(double command) {
+        //convert command to a percentage of maxRPM, 
+        //then convert revolutions to units
+        //and minutes to 100ms
+        return command * MAX_RPM * 4096 / 600;
+    }
 }
