@@ -17,20 +17,20 @@ import frc.robot.custom.Gains;
 public final class Constants {
 
     public static final int rightTalonPort = 1;
-    public static final int leftTalonPort  = 2;
+    public static final int leftTalonPort  = 3;
 
-    public static final int rightVictorPort = 3;
+    public static final int rightVictorPort = 2;
     public static final int leftVictorPort  = 4;
 
     //window to await the completion of ctre config methods
-    public static final int kTimeoutMs = 30;
+    public static final int kTimeoutMs = 50;
 
     //Velocity Driving Gains
-    public static final Gains rightDriveGains = new Gains();
-    public static final Gains leftDriveGains = new Gains();
+    public static final Gains rightDriveGains = new Gains(0.44, 0, 0, 0);
+    public static final Gains leftDriveGains = new Gains(0.44, 0, 0, 0);
 
     //Drive Characteristics
-    public static final int MAX_RPM = 567;
+    public static final int MAX_RPM = 340;
 
-    public static final int kXboxPort = 1;
+    public static final int kXboxPort = 0;
 }
