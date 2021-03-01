@@ -29,7 +29,7 @@ public class Drive extends SubsystemBase {
     rightTalon = new WPI_VeloTalon(rightTalonPort, rightDriveGains);
     
     drivetrain = new DifferentialDrive(leftTalon, rightTalon);
-    drivetrain.setRightSideInverted(false);
+    drivetrain.setRightSideInverted(true);
 
     //follower setup
 
