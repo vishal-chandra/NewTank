@@ -34,14 +34,14 @@ public class RobotContainer {
     drive.setDefaultCommand(
       new RunCommand(
       () -> drive.curvatureDrive(
-        xbox.getY(Hand.kLeft),
+        -xbox.getY(Hand.kLeft),
         xbox.getX(Hand.kRight)
       ),
       drive)
     );
   }
 
-  /**
+  /**F
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link

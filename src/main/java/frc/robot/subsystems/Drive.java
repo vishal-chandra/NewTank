@@ -34,7 +34,7 @@ public class Drive extends SubsystemBase {
     rightGroup = new SpeedControllerGroup(rightTalon, rightVictor);
 
     drivetrain = new DifferentialDrive(leftGroup, rightGroup);
-    drivetrain.setRightSideInverted(false);
+    drivetrain.setRightSideInverted(true);
   }
 
   public void curvatureDrive(double power, double turn) {

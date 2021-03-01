@@ -20,5 +20,5 @@ public final class Constants {
     public static final int rightVictorPort = 3;
     public static final int leftVictorPort  = 4;
 
-    public static final int kXboxPort = 1;
+    public static final int kXboxPort = 0;
 }
