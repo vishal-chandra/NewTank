@@ -54,7 +54,6 @@ public class Drive extends SubsystemBase {
 
     //gyro setup
     gyro = new AHRS(SerialPort.Port.kMXP);
-    gyro.reset(); //start at 0deg
 
     //odometry setup
     odometry = new DifferentialDriveOdometry(getCurrentRotation2d());
@@ -65,8 +64,12 @@ public class Drive extends SubsystemBase {
     drivetrain.curvatureDrive(power, turn, true);
   }
 
+  public double getAngle() {
+    return gyro.getAngle();
+  }
+
   public Rotation2d getCurrentRotation2d() {
-    return Rotation2d.fromDegrees(gyro.getAngle());
+    return Rotation2d.fromDegrees(getAngle());
   }
 
   public double getLeftEncoderDistance() {
@@ -80,7 +83,7 @@ public class Drive extends SubsystemBase {
   }
 
   public void periodic() {
-    System.out.println(gyro.getAngle());
+    System.out.println(getAngle());
 
     //update odometry
     robotPose = odometry.update(getCurrentRotation2d(), getLeftEncoderDistance(), getRightEncoderDistance());
