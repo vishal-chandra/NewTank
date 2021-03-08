@@ -5,6 +5,9 @@ import frc.robot.custom.WPI_VeloTalon;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -24,6 +27,9 @@ public class Drive extends SubsystemBase {
   DifferentialDrive drivetrain;
 
   AHRS gyro;
+
+  DifferentialDriveOdometry odometry;
+  Pose2d robotPose;
 
   /** Creates a new Drive. */
   public Drive() {
@@ -49,13 +55,34 @@ public class Drive extends SubsystemBase {
     //gyro setup
     gyro = new AHRS(SerialPort.Port.kMXP);
     gyro.reset(); //start at 0deg
+
+    //odometry setup
+    odometry = new DifferentialDriveOdometry(getCurrentRotation2d());
+    robotPose = new Pose2d();
   }
 
   public void curvatureDrive(double power, double turn) {
     drivetrain.curvatureDrive(power, turn, true);
   }
 
+  public Rotation2d getCurrentRotation2d() {
+    return Rotation2d.fromDegrees(gyro.getAngle());
+  }
+
+  public double getLeftEncoderDistance() {
+    //ticks -> rotations -> distance
+    return leftTalon.getSelectedSensorPosition() / 4096 * WHEEL_CIRCUMFERENCE_FEET;
+  }
+
+  public double getRightEncoderDistance() {
+    //ticks -> rotations -> distance
+    return rightTalon.getSelectedSensorPosition() / 4096 * WHEEL_CIRCUMFERENCE_FEET;
+  }
+
   public void periodic() {
     System.out.println(gyro.getAngle());
+
+    //update odometry
+    robotPose = odometry.update(getCurrentRotation2d(), getLeftEncoderDistance(), getRightEncoderDistance());
   }
 }
