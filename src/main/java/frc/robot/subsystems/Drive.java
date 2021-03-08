@@ -2,12 +2,14 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.custom.WPI_VeloTalon;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
 import static frc.robot.Constants.*;
 
@@ -19,8 +21,9 @@ public class Drive extends SubsystemBase {
 
   WPI_VeloTalon leftTalon, rightTalon;
   WPI_VictorSPX leftVictor, rightVictor;
-
   DifferentialDrive drivetrain;
+
+  AHRS gyro;
 
   /** Creates a new Drive. */
   public Drive() {
@@ -42,6 +45,10 @@ public class Drive extends SubsystemBase {
     rightVictor.configFactoryDefault();
     rightVictor.follow(rightTalon);
     rightVictor.setInverted(InvertType.FollowMaster);
+
+    //gyro setup
+    gyro = new AHRS(SerialPort.Port.kMXP);
+    gyro.reset(); //start at 0deg
   }
 
   public void curvatureDrive(double power, double turn) {
