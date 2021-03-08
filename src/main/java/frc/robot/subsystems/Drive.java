@@ -54,4 +54,8 @@ public class Drive extends SubsystemBase {
   public void curvatureDrive(double power, double turn) {
     drivetrain.curvatureDrive(power, turn, true);
   }
+
+  public void periodic() {
+    System.out.println(gyro.getAngle());
+  }
 }
