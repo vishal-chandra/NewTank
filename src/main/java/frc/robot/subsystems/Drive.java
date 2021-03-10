@@ -78,7 +78,7 @@ public class Drive extends SubsystemBase {
 
   public double getLeftEncoderDistance() {
     //ticks -> rotations -> distance
-    return leftTalon.getSelectedSensorPosition() / 4096 * WHEEL_CIRCUMFERENCE_FEET;
+    return -leftTalon.getSelectedSensorPosition() / 4096 * WHEEL_CIRCUMFERENCE_FEET;
   }
 
   public double getRightEncoderDistance() {
@@ -87,9 +87,9 @@ public class Drive extends SubsystemBase {
   }
 
   public void periodic() {
-    System.out.println(getAngle());
-
     //update odometry
     robotPose = odometry.update(getCurrentRotation2d(), getLeftEncoderDistance(), getRightEncoderDistance());
+
+    System.out.println(robotPose);
   }
 }
