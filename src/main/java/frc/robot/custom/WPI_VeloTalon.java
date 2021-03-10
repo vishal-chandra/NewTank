@@ -16,6 +16,7 @@ public class WPI_VeloTalon extends TalonSRX implements SpeedController {
         super(deviceNumber);
         configFactoryDefault();
         configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, kTimeoutMs);
+        setSelectedSensorPosition(0);
         //setSensorPhase(false); //for sensor alignments
 
         //set gains

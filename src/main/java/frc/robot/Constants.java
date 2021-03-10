@@ -31,7 +31,7 @@ public final class Constants {
 
     //Drive Characteristics
     public static final int MAX_RPM = 340;
-    public static final double WHEEL_DIAMETER_FEET = 5.0 / 12.0;
+    public static final double WHEEL_DIAMETER_FEET = 6.0 / 12.0;
     public static final double WHEEL_CIRCUMFERENCE_FEET = WHEEL_DIAMETER_FEET * Math.PI;
 
     public static final int kXboxPort = 0;

@@ -54,6 +54,10 @@ public class Drive extends SubsystemBase {
 
     //gyro setup
     gyro = new AHRS(SerialPort.Port.kMXP);
+    try{
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {}
+    gyro.zeroYaw();
 
     //odometry setup
     odometry = new DifferentialDriveOdometry(getCurrentRotation2d());
@@ -65,7 +69,7 @@ public class Drive extends SubsystemBase {
   }
 
   public double getAngle() {
-    return gyro.getAngle();
+    return -gyro.getAngle();
   }
 
   public Rotation2d getCurrentRotation2d() {
