@@ -14,11 +14,11 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static final int rightTalonPort = 1;
-    public static final int leftTalonPort  = 2;
+    public static final int rightTalonPort = 6;
+    public static final int leftTalonPort  = 9;
 
-    public static final int rightVictorPort = 3;
-    public static final int leftVictorPort  = 4;
+    public static final int rightVictorPort = 1;
+    public static final int leftVictorPort  = 2;
 
     public static final int kXboxPort = 0;
 }

@@ -15,7 +15,7 @@ import static frc.robot.Constants.*;
  */
 public class Drive extends SubsystemBase {
 
-  WPI_TalonSRX leftTalon, rightTalon;
+  WPI_TalonSRX leftTalon, rightTalon, rightTalonFollower;
   WPI_VictorSPX leftVictor, rightVictor;
 
   SpeedControllerGroup leftGroup, rightGroup;
@@ -28,10 +28,10 @@ public class Drive extends SubsystemBase {
     rightTalon = new WPI_TalonSRX(rightTalonPort);
     
     leftVictor  = new WPI_VictorSPX(leftVictorPort);
-    rightVictor = new WPI_VictorSPX(rightTalonPort);
+    rightTalonFollower = new WPI_TalonSRX(rightVictorPort);
 
     leftGroup = new SpeedControllerGroup(leftTalon, leftVictor);
-    rightGroup = new SpeedControllerGroup(rightTalon, rightVictor);
+    rightGroup = new SpeedControllerGroup(rightTalon, rightTalonFollower);
 
     drivetrain = new DifferentialDrive(leftGroup, rightGroup);
     drivetrain.setRightSideInverted(true);
