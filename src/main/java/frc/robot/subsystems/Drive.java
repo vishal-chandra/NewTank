@@ -18,7 +18,8 @@ import static frc.robot.Constants.*;
 public class Drive extends SubsystemBase {
 
   WPI_VeloTalon leftTalon, rightTalon;
-  WPI_VictorSPX leftVictor, rightVictor;
+  WPI_TalonSRX rightTalonFollower;
+  WPI_VictorSPX leftVictor;
 
   DifferentialDrive drivetrain;
 
@@ -27,9 +28,10 @@ public class Drive extends SubsystemBase {
 
     leftTalon  = new WPI_VeloTalon(leftTalonPort, leftDriveGains);
     rightTalon = new WPI_VeloTalon(rightTalonPort, rightDriveGains);
+    rightTalon.setInverted(true);
     
     drivetrain = new DifferentialDrive(leftTalon, rightTalon);
-    drivetrain.setRightSideInverted(true);
+    drivetrain.setRightSideInverted(false);
 
     //follower setup
 
@@ -38,10 +40,10 @@ public class Drive extends SubsystemBase {
     leftVictor.follow(leftTalon);
     leftVictor.setInverted(InvertType.FollowMaster);
 
-    rightVictor = new WPI_VictorSPX(rightTalonPort);
-    rightVictor.configFactoryDefault();
-    rightVictor.follow(rightTalon);
-    rightVictor.setInverted(InvertType.FollowMaster);
+    rightTalonFollower = new WPI_TalonSRX(rightTalonFollowerPort);
+    rightTalonFollower.configFactoryDefault();
+    rightTalonFollower.follow(rightTalon);
+    rightTalonFollower.setInverted(InvertType.FollowMaster);
   }
 
   public void curvatureDrive(double power, double turn) {

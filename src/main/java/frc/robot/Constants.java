@@ -16,11 +16,11 @@ import frc.robot.custom.Gains;
  */
 public final class Constants {
 
-    public static final int rightTalonPort = 1;
-    public static final int leftTalonPort  = 3;
+    public static final int rightTalonPort = 6;
+    public static final int leftTalonPort  = 9;
 
-    public static final int rightVictorPort = 2;
-    public static final int leftVictorPort  = 4;
+    public static final int rightTalonFollowerPort = 1;
+    public static final int leftVictorPort  = 2;
 
     //window to await the completion of ctre config methods
     public static final int kTimeoutMs = 50;
