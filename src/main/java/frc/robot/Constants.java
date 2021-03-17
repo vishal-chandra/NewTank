@@ -26,11 +26,11 @@ public final class Constants {
     public static final int kTimeoutMs = 50;
 
     //Velocity Driving Gains
-    public static final Gains rightDriveGains = new Gains(0.44, 0, 0, 0);
-    public static final Gains leftDriveGains = new Gains(0.44, 0, 0, 0);
+    public static final Gains rightDriveGains = new Gains(0.294, 0, 0, 0);
+    public static final Gains leftDriveGains = new Gains(0.297, 0, 0, 0);
 
     //Drive Characteristics
-    public static final int MAX_RPM = 340;
+    public static final int MAX_RPM = 505;
 
     public static final int kXboxPort = 0;
 }
