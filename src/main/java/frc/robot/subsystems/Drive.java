@@ -50,10 +50,18 @@ public class Drive extends SubsystemBase {
     rightTalonFollower.configFactoryDefault();
     rightTalonFollower.follow(rightTalon);
     rightTalonFollower.setInverted(InvertType.FollowMaster);
+
+    //slew rate setup
+    throttleRamp = new SlewRateLimiter(kThrottleSlewRate);
+    turnRamp = new SlewRateLimiter(kTurnSlewRate);
   }
 
   public void curvatureDrive(double power, double turn) {
-    drivetrain.curvatureDrive(curve(power), curve(turn), true);
+    double adjPower = throttleRamp.calculate(curve(power));
+    double adjTurn = turnRamp.calculate(curve(turn));
+
+    //send adjusted values to motors
+    drivetrain.curvatureDrive(adjPower, adjTurn, true);
   }
 
   /**

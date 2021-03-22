@@ -31,6 +31,8 @@ public final class Constants {
 
     //Drive Characteristics
     public static final int MAX_RPM = 505;
-
     public static final int kXboxPort = 0;
+
+    public static final double kThrottleSlewRate = 1.5;
+    public static final double kTurnSlewRate = 1.8;
 }
