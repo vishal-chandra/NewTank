@@ -27,7 +27,10 @@ public class Drive extends SubsystemBase {
   public Drive() {
 
     leftTalon  = new WPI_VeloTalon(leftTalonPort, leftDriveGains);
+    leftTalon.setSensorPhase(true);
+
     rightTalon = new WPI_VeloTalon(rightTalonPort, rightDriveGains);
+    rightTalon.setSensorPhase(true);
     rightTalon.setInverted(true);
     
     drivetrain = new DifferentialDrive(leftTalon, rightTalon);
@@ -48,5 +51,10 @@ public class Drive extends SubsystemBase {
 
   public void curvatureDrive(double power, double turn) {
     drivetrain.curvatureDrive(power, turn, true);
+  }
+
+  public void periodic() {
+    System.out.println("L vel " + leftTalon.getSelectedSensorVelocity() + "  R vel: " + rightTalon.getSelectedSensorVelocity() +
+                       "L targ " + leftTalon.getClosedLoopTarget(0) + " R targ: " + rightTalon.getClosedLoopTarget());
   }
 }

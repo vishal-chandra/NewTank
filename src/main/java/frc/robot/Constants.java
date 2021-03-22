@@ -16,18 +16,18 @@ import frc.robot.custom.Gains;
  */
 public final class Constants {
 
-    public static final int rightTalonPort = 6;
+    public static final int rightTalonPort = 1;
     public static final int leftTalonPort  = 9;
 
-    public static final int rightTalonFollowerPort = 1;
+    public static final int rightTalonFollowerPort = 6;
     public static final int leftVictorPort  = 2;
 
     //window to await the completion of ctre config methods
     public static final int kTimeoutMs = 50;
 
     //Velocity Driving Gains
-    public static final Gains rightDriveGains = new Gains(0.294, 0, 0, 0);
-    public static final Gains leftDriveGains = new Gains(0.297, 0, 0, 0);
+    public static final Gains rightDriveGains = new Gains(0.294, 0.1, 0, 0);
+    public static final Gains leftDriveGains = new Gains(0.297, 0.15, 0, 0);
 
     //Drive Characteristics
     public static final int MAX_RPM = 505;
