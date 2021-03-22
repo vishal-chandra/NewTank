@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.custom.WPI_VeloTalon;
+import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -22,6 +23,8 @@ public class Drive extends SubsystemBase {
   WPI_VictorSPX leftVictor;
 
   DifferentialDrive drivetrain;
+
+  SlewRateLimiter throttleRamp, turnRamp;
 
   /** Creates a new Drive. */
   public Drive() {
@@ -50,11 +53,20 @@ public class Drive extends SubsystemBase {
   }
 
   public void curvatureDrive(double power, double turn) {
-    drivetrain.curvatureDrive(power, turn, true);
+    drivetrain.curvatureDrive(curve(power), curve(turn), true);
+  }
+
+  /**
+   * f(x) = |x|x
+   */
+  double curve(double input) {
+    return Math.abs(input) * input;
   }
 
   public void periodic() {
     System.out.println("L vel " + leftTalon.getSelectedSensorVelocity() + "  R vel: " + rightTalon.getSelectedSensorVelocity() +
                        "L targ " + leftTalon.getClosedLoopTarget(0) + " R targ: " + rightTalon.getClosedLoopTarget());
   }
+
+
 }
