@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.kauailabs.navx.frc.AHRS;
 
 import static frc.robot.Constants.*;
@@ -26,7 +27,8 @@ public class Drive extends SubsystemBase {
   WPI_VictorSPX leftVictor, rightVictor;
   DifferentialDrive drivetrain;
 
-  AHRS gyro;
+  PigeonIMU gyro;
+  double[] ypr = {0, 0, 0};
 
   DifferentialDriveOdometry odometry;
   Pose2d robotPose;
@@ -52,12 +54,10 @@ public class Drive extends SubsystemBase {
     rightVictor.follow(rightTalon);
     rightVictor.setInverted(InvertType.FollowMaster);
 
-    //gyro setup
-    gyro = new AHRS(SerialPort.Port.kMXP);
-    try{
-      Thread.sleep(3000);
-    } catch (InterruptedException e) {}
-    gyro.zeroYaw();
+    //gyro setup, start at 0deg
+    gyro = new PigeonIMU(0);
+    gyro.setYaw(0);
+    gyro.setFusedHeading(0);
 
     //odometry setup
     odometry = new DifferentialDriveOdometry(getCurrentRotation2d());
@@ -69,7 +69,8 @@ public class Drive extends SubsystemBase {
   }
 
   public double getAngle() {
-    return -gyro.getAngle();
+    gyro.getYawPitchRoll(ypr);
+    return ypr[0];
   }
 
   public Rotation2d getCurrentRotation2d() {
